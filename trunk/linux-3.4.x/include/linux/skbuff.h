@@ -124,6 +124,7 @@ struct nf_bridge_info {
 	struct net_device *physoutdev;
 	unsigned int mask;
 	unsigned long data[32 / sizeof(unsigned long)];
+	__u16	frag_max_size;
 };
 #endif
 
