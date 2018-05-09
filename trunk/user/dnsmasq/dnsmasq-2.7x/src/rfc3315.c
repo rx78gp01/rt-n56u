@@ -1,4 +1,4 @@
-/* dnsmasq is Copyright (c) 2000-2017 Simon Kelley
+/* dnsmasq is Copyright (c) 2000-2018 Simon Kelley
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -162,11 +162,8 @@ static int dhcp6_maybe_relay(struct state *state, void *inbuff, size_t sz,
 	  
       if (!state->context)
 	{
-#if 0
-/* disable DHCPv6 noaddr messages, noisy */
 	  my_syslog(MS_DHCP | LOG_WARNING, 
 		    _("no address range available for DHCPv6 request via %s"), state->iface_name);
-#endif
 	  return 0;
 	}
 
@@ -219,9 +216,9 @@ static int dhcp6_maybe_relay(struct state *state, void *inbuff, size_t sz,
   
   for (opt = opts; opt; opt = opt6_next(opt, end))
     {
-      if (opt6_ptr(opt, 0) + opt6_len(opt) >= end) {
+      if (opt6_ptr(opt, 0) + opt6_len(opt) > end) 
         return 0;
-      }
+     
       int o = new_opt6(opt6_type(opt));
       if (opt6_type(opt) == OPTION6_RELAY_MSG)
 	{
@@ -852,7 +849,7 @@ static int dhcp6_no_relay(struct state *state, int msg_type, void *inbuff, size_
 	    for (c = state->context; c; c = c->current)
 	      if (!(c->flags & CONTEXT_RA_STATELESS))
 		{
-		  log6_quiet(state, state->lease_allocate ? "DHCPREPLY" : "DHCPADVERTISE", NULL, _("no addresses available"));
+		  log6_packet(state, state->lease_allocate ? "DHCPREPLY" : "DHCPADVERTISE", NULL, _("no addresses available"));
 		  break;
 		}
 	  }
@@ -885,7 +882,7 @@ static int dhcp6_no_relay(struct state *state, int msg_type, void *inbuff, size_
 
 	     if (!ia_option)
 	       {
-		 /* If we get a request with a IA_*A without addresses, treat it exactly like
+		 /* If we get a request with an IA_*A without addresses, treat it exactly like
 		    a SOLICT with rapid commit set. */
 		 save_counter(start);
 		 goto request_no_address; 
@@ -969,7 +966,7 @@ static int dhcp6_no_relay(struct state *state, int msg_type, void *inbuff, size_
 	    put_opt6_short(DHCP6NOADDRS);
 	    put_opt6_string(_("no addresses available"));
 	    end_opt6(o1);
-	    log6_quiet(state, "DHCPREPLY", NULL, _("no addresses available"));
+	    log6_packet(state, "DHCPREPLY", NULL, _("no addresses available"));
 	  }
 
 	tagif = add_options(state, 0);
@@ -1065,7 +1062,10 @@ static int dhcp6_no_relay(struct state *state, int msg_type, void *inbuff, size_
 		    message = _("address invalid");
 		  } 
 
-		log6_quiet(state, "DHCPREPLY", req_addr, message);
+		if (message && (message != state->hostname))
+		  log6_packet(state, "DHCPREPLY", req_addr, message);	
+		else
+		  log6_quiet(state, "DHCPREPLY", req_addr, message);
 	
 		o1 =  new_opt6(OPTION6_IAADDR);
 		put_opt6(req_addr, sizeof(*req_addr));
@@ -1625,7 +1625,7 @@ static void end_ia(int t1cntr, unsigned int min_time, int do_fuzz)
 {
   if (t1cntr != 0)
     {
-      /* go back an fill in fields in IA_NA option */
+      /* go back and fill in fields in IA_NA option */
       int sav = save_counter(t1cntr);
       unsigned int t1, t2, fuzz = 0;
 

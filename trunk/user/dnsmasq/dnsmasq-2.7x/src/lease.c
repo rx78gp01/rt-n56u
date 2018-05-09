@@ -1,4 +1,4 @@
-/* dnsmasq is Copyright (c) 2000-2017 Simon Kelley
+/* dnsmasq is Copyright (c) 2000-2018 Simon Kelley
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -933,11 +933,8 @@ void lease_set_hostname(struct dhcp_lease *lease, const char *name, int auth, ch
   struct dhcp_lease *lease_tmp;
   char *new_name = NULL, *new_fqdn = NULL;
 
-#if 0
-/* disable warning, noisy */
   if (config_domain && (!domain || !hostname_isequal(domain, config_domain)))
     my_syslog(MS_DHCP | LOG_WARNING, _("Ignoring domain %s for DHCP host name %s"), config_domain, name);
-#endif
   
   if (lease->hostname && name && hostname_isequal(lease->hostname, name))
     {

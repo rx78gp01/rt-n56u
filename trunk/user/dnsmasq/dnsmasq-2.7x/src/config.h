@@ -1,4 +1,4 @@
-/* dnsmasq is Copyright (c) 2000-2017 Simon Kelley
+/* dnsmasq is Copyright (c) 2000-2018 Simon Kelley
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@
 #define TIMEOUT 10 /* drop UDP queries after TIMEOUT seconds */
 #define FORWARD_TEST 50 /* try all servers every 50 queries */
 #define FORWARD_TIME 20 /* or 20 seconds */
+#define UDP_TEST_TIME 60 /* How often to reset our idea of max packet size. */
 #define SERVERS_LOGGED 30 /* Only log this many servers when logging state */
 #define LOCALS_LOGGED 8 /* Only log this many local addresses when logging state */
 #define RANDOM_SOCKS 64 /* max simultaneous random ports */
@@ -43,7 +44,7 @@
 #define ETHERSFILE "/etc/ethers"
 #define DEFLEASE 3600 /* default lease time, 1 hour */
 #define CHUSER "nobody"
-#define CHGRP "nogroup"
+#define CHGRP "dip"
 #define TFTP_MAX_CONNECTIONS 50 /* max simultaneous connections */
 #define LOG_MAX 5 /* log-queue length */
 #define RANDFILE "/dev/urandom"
@@ -136,9 +137,6 @@ NO_INOTIFY
    otherwise be enabled automatically (HAVE_IPV6, >2Gb file sizes) or 
    which are enabled  by default in the distributed source tree. Building dnsmasq
    with something like "make COPTS=-DNO_SCRIPT" will do the trick.
-
-NO_NETTLE_ECC
-   Don't include the ECDSA cypher in DNSSEC validation. Needed for older Nettle versions.
 NO_GMP
    Don't use and link against libgmp, Useful if nettle is built with --enable-mini-gmp.
 
@@ -166,8 +164,6 @@ RESOLVFILE
 #define HAVE_AUTH
 #define HAVE_IPSET 
 #define HAVE_LOOP
-
-#define LEASEFILE "/tmp/dnsmasq.leases"
 
 /* Build options which require external libraries.
    
@@ -261,8 +257,6 @@ HAVE_SOCKADDR_SA_LEN
 #  ifndef IPV6_V6ONLY
 #    define IPV6_V6ONLY 26
 #  endif
-#elif !defined(NO_IPV6)
-#  define NO_IPV6
 #endif
 
 /* This is for glibc 2.x */
