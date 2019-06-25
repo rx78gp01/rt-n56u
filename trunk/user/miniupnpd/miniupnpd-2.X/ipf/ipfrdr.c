@@ -1,4 +1,4 @@
-/* $Id: ipfrdr.c,v 1.19 2016/12/16 09:11:19 nanard Exp $ */
+/* $Id: ipfrdr.c,v 1.18 2016/02/12 14:12:25 nanard Exp $ */
 /* MiniUPnP project
  * http://miniupnp.free.fr/ or http://miniupnp.tuxfamily.org/
  * (c) 2007 Darren Reed

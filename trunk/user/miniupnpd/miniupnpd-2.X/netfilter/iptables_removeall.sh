@@ -1,5 +1,5 @@
 #! /bin/sh
-# $Id: iptables_removeall.sh,v 1.11 2018/04/06 10:17:09 nanard Exp $
+# $Id: iptables_removeall.sh,v 1.10 2017/04/21 11:16:09 nanard Exp $
 
 EXT=1
 . $(dirname "$0")/miniupnpd_functions.sh

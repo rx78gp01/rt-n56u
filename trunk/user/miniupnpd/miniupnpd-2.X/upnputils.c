@@ -1,4 +1,4 @@
-/* $Id: upnputils.c,v 1.13 2018/04/12 08:12:34 nanard Exp $ */
+/* $Id: upnputils.c,v 1.12 2018/03/13 10:25:20 nanard Exp $ */
 /* MiniUPnP project
  * http://miniupnp.free.fr/ or http://miniupnp.tuxfamily.org/
  * (c) 2006-2018 Thomas Bernard

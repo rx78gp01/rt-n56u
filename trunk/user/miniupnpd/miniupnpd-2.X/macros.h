@@ -1,4 +1,4 @@
-/* $Id: macros.h,v 1.4 2016/12/16 09:11:18 nanard Exp $ */
+/* $Id: macros.h,v 1.1 2012/04/30 20:37:56 nanard Exp $ */
 /* MiniUPnP project
  * http://miniupnp.free.fr/ or http://miniupnp.tuxfamily.org/
  * (c) 2012-2015 Thomas Bernard

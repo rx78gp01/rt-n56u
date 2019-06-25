@@ -1,4 +1,4 @@
-/* $Id: testportinuse.c,v 1.4 2016/02/09 09:37:44 nanard Exp $ */
+/* $Id: testportinuse.c,v 1.3 2014/03/28 12:13:17 nanard Exp $ */
 /* MiniUPnP project
  * (c) 2014 Thomas Bernard
  * http://miniupnp.free.fr/ or http://miniupnp.tuxfamily.org/
@@ -15,9 +15,9 @@
 #include "portinuse.h"
 
 #ifdef USE_NETFILTER
-const char * miniupnpd_nat_chain = "upnp";
-const char * miniupnpd_nat_postrouting_chain = "upnp-post";
-const char * miniupnpd_forward_chain = "upnp";
+const char * miniupnpd_nat_chain = "MINIUPNPD";
+const char * miniupnpd_nat_postrouting_chain = "MINIUPNPD-POSTROUTING";
+const char * miniupnpd_forward_chain = "MINIUPNPD";
 #endif /* USE_NETFILTER */
 
 int main(int argc, char * * argv)
