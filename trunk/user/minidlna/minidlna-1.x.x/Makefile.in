@@ -134,7 +134,7 @@ am_minidlnad_OBJECTS = minidlna.$(OBJEXT) upnphttp.$(OBJEXT) \
 	tivo_commands.$(OBJEXT) playlist.$(OBJEXT) \
 	image_utils.$(OBJEXT) albumart.$(OBJEXT) log.$(OBJEXT) \
 	containers.$(OBJEXT) avahi.$(OBJEXT) \
-	tagutils/tagutils.$(OBJEXT)
+	tagutils/tagutils.$(OBJEXT) select.$(OBJEXT)
 minidlnad_OBJECTS = $(am_minidlnad_OBJECTS)
 am__DEPENDENCIES_1 =
 minidlnad_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
@@ -397,7 +397,7 @@ minidlnad_SOURCES = minidlna.c upnphttp.c upnpdescgen.c upnpsoap.c \
 			sql.c utils.c metadata.c scanner.c monitor.c \
 			tivo_utils.c tivo_beacon.c tivo_commands.c \
 			playlist.c image_utils.c albumart.c log.c \
-			containers.c avahi.c tagutils/tagutils.c
+			containers.c avahi.c tagutils/tagutils.c select.c
 
 @HAVE_VORBISFILE_TRUE@vorbislibs = -lvorbis -logg
 @HAVE_VORBISFILE_FALSE@@NEED_OGG_TRUE@flacogglibs = -logg
@@ -587,6 +587,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/upnpsoap.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utils.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/uuid.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/select.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tagutils/$(DEPDIR)/tagutils.Po@am__quote@
 
 .c.o:

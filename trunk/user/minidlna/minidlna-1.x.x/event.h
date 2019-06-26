@@ -29,12 +29,14 @@ struct event {
 	int		 fd;
 	int		 index;
 	event_t		 rdwr;
+#ifdef HAVE_KQUEUE
 	union {
+#endif
 		event_process_t		*process;
 #ifdef HAVE_KQUEUE
 		event_vnode_process_t	*process_vnode;
-#endif
 	};
+#endif
 	void		*data;
 };
 
