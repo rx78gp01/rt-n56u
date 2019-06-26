@@ -19,7 +19,6 @@ AC_INIT(MiniDLNA,1.1.3,,minidlna)
 
 AC_CANONICAL_TARGET
 AM_INIT_AUTOMAKE([subdir-objects])
-AM_MAINTAINER_MODE([disable])
 AC_CONFIG_HEADERS([config.h])
 AM_SILENT_RULES([yes])
 
@@ -69,6 +68,7 @@ AC_C_BIGENDIAN
 AC_FUNC_FORK
 AC_FUNC_LSTAT_FOLLOWS_SLASHED_SYMLINK
 AC_CHECK_FUNCS([gethostname getifaddrs gettimeofday inet_ntoa memmove memset mkdir realpath select sendfile setlocale socket strcasecmp strchr strdup strerror strncasecmp strpbrk strrchr strstr strtol strtoul])
+AC_CHECK_DECLS([SEEK_HOLE])
 
 #
 # Check for struct ip_mreqn
@@ -512,6 +512,8 @@ AC_CHECK_FUNCS(inotify_init, AC_DEFINE(HAVE_INOTIFY,1,[Whether kernel has inotif
              AC_MSG_RESULT([no])
          ])
 ])
+
+AC_CHECK_FUNCS(kqueue, AM_CONDITIONAL(HAVE_KQUEUE, true), AM_CONDITIONAL(HAVE_KQUEUE, false))
 
 ################################################################################################################
 ### Build Options
