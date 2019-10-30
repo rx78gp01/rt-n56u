@@ -35,6 +35,8 @@
 #include <openssl/x509.h>
 #include <openssl/pem.h>
 #include <openssl/dh.h>
+#include "dh_local.h"
+#include "ssl_local.h"
 
 #include "httpd.h"
 

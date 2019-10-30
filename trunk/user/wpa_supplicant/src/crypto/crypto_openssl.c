@@ -24,6 +24,7 @@
 
 #include "common.h"
 #include "crypto.h"
+#include "evp_local.h"
 
 #if OPENSSL_VERSION_NUMBER < 0x00907000
 #define DES_key_schedule des_key_schedule

@@ -30,6 +30,8 @@
 
 #include "common.h"
 #include "tls.h"
+#include "ssl_local.h"
+#include "evp_local.h"
 
 #if OPENSSL_VERSION_NUMBER >= 0x0090800fL
 #define OPENSSL_d2i_TYPE const unsigned char **

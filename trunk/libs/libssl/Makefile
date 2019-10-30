@@ -2,6 +2,9 @@ SRC_NAME=openssl-1.1.1
 
 # openssl use CROSS_COMPILE prefix
 CC=gcc $(CPUFLAGS)
+AR=ar
+RANLIB=ranlib
+CXX=g++ $(CPUFLAGS)
 
 COPTS=-ffunction-sections -fdata-sections -Wl,--gc-sections -I$(DESTDIR)/include
 COPTS+=$(if $(CONFIG_IPV6),-DOPENSSL_USE_IPV6=1,)
@@ -11,15 +14,15 @@ LOPTS=-Wl,--gc-sections -L$(DESTDIR)/lib
 
 OPENSSL_APPS =
 
-OPENSSL_CIPHERS = no-capieng no-cms no-gmp no-jpake no-rfc3779 no-seed \
-                  no-ec2m no-err no-threads no-idea no-rc5 no-ripemd no-rmd160 \
-                  no-static-engine no-hw no-md2 no-sse2 no-dso no-ts no-sha0 no-mdc2 no-krb5 \
-                  no-smime no-ans1 no-cast no-whirlpool no-sctp no-srp no-ssl2 no-ssl3
+OPENSSL_CIPHERS = no-capieng no-cms no-rfc3779 no-seed \
+                  no-ec2m no-err no-threads no-idea no-rc5 no-rmd160 \
+                  no-static-engine no-hw no-md2 no-sse2 no-dso no-ts no-mdc2 \
+                  no-cast no-whirlpool no-sctp no-srp no-ssl2 no-ssl3
 
 ifdef CONFIG_CRYPTO_DEV_LINUX
 COPTS+=-DHAVE_CRYPTODEV
 else
-OPENSSL_APPS += no-speed
+#OPENSSL_APPS += no-speed
 OPENSSL_CIPHERS += no-engine
 endif
 
@@ -44,10 +47,9 @@ config_test:
 configure:
 	( cd $(SRC_NAME) ; \
 	./Configure \
-		linux-mipsel \
+		linux-mips32 \
 		shared \
 		--prefix=/ \
-		--install_prefix=$(STAGEDIR) \
 		--openssldir=/etc/ssl \
 		$(COPTS) \
 		$(LOPTS) \
