@@ -87,7 +87,7 @@ static const char *forbidden_list[] = {
 	"writepid ",
 	"auth ",
 	"cipher ",
-	"comp-lzo",
+	"compress",
 	"persist-key",
 	"persist-tun",
 	NULL
@@ -281,23 +281,23 @@ openvpn_add_lzo(FILE *fp, int clzo_idx, int is_server_mode)
 	switch (clzo_idx)
 	{
 	case 1:
-		/* also use for obtain comp-lzo from server */
-		clzo_str = "no";
+		/* also use for obtain compress from server */
+		clzo_str = " ";
 		break;
 	case 2:
-		clzo_str = "adaptive";
+		clzo_str = "lzo";
 		break;
 	case 3:
-		clzo_str = "yes";
+		clzo_str = "lz4";
 		break;
 	default:
 		return;
 	}
 
-	fprintf(fp, "comp-lzo %s\n", clzo_str);
+	fprintf(fp, "compress %s\n", clzo_str);
 
-	if (is_server_mode)
-		fprintf(fp, "push \"comp-lzo %s\"\n", clzo_str);
+	if (is_server_mode && (clzo_idx == 2 || clzo_idx == 3))
+		fprintf(fp, "push \"compress %s\"\n", clzo_str);
 }
 
 static void
@@ -367,9 +367,9 @@ openvpn_create_server_conf(const char *conf_file, int is_tun)
 	else
 #endif
 	if (i_prot == 1)
-		p_prot = "tcp-server";
+		p_prot = "tcp4-server";
 	else
-		p_prot = "udp";
+		p_prot = "udp4";
 
 	/* fixup ipv4/ipv6 mismatch */
 	if (i_prot != i_prot_ori)
@@ -535,9 +535,9 @@ openvpn_create_client_conf(const char *conf_file, int is_tun)
 	else
 #endif
 	if (i_prot == 1)
-		p_prot = "tcp-client";
+		p_prot = "tcp4-client";
 	else
-		p_prot = "udp";
+		p_prot = "udp4";
 
 	/* fixup ipv4/ipv6 mismatch */
 	if (i_prot != i_prot_ori)
@@ -1030,9 +1030,9 @@ ovpn_server_expcli_main(int argc, char **argv)
 	else
 #endif
 	if (i_prot == 1)
-		p_prot = "tcp-client";
+		p_prot = "tcp4-client";
 	else
-		p_prot = "udp";
+		p_prot = "udp4";
 
 	wan_addr = get_ddns_fqdn();
 	if (!wan_addr) {
@@ -1075,7 +1075,7 @@ ovpn_server_expcli_main(int argc, char **argv)
 	fprintf(fp, "nice %d\n", 0);
 	fprintf(fp, "verb %d\n", 3);
 	fprintf(fp, "mute %d\n", 10);
-	fprintf(fp, ";remote-cert-tls %s\n", "server");
+	fprintf(fp, "remote-cert-tls %s\n", "server");
 	openvpn_add_key(fp, SERVER_CERT_DIR, openvpn_server_keys[0], "ca");
 	openvpn_add_key(fp, tmp_ovpn_path, openvpn_client_keys[1], "cert");
 	openvpn_add_key(fp, tmp_ovpn_path, openvpn_client_keys[2], "key");

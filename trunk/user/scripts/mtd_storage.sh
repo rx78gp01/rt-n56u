@@ -527,6 +527,9 @@ EOF
 # Custom user conf file for OpenVPN server
 # Please add needed params only!
 
+ncp-disable
+tls-version-min 1.2
+
 ### Max clients limit
 max-clients 10
 
