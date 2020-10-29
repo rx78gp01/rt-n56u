@@ -367,6 +367,10 @@ openvpn_create_server_conf(const char *conf_file, int is_tun)
 		p_prot = "tcp6-server";
 	else if (i_prot == 2)
 		p_prot = "udp6";
+	else if (i_prot == 5)
+		p_prot = "tcp-server";
+	else if (i_prot == 4)
+		p_prot = "udp";
 	else
 #endif
 	if (i_prot == 1)
@@ -535,6 +539,10 @@ openvpn_create_client_conf(const char *conf_file, int is_tun)
 		p_prot = "tcp6-client";
 	else if (i_prot == 2)
 		p_prot = "udp6";
+	else if (i_prot == 5)
+		p_prot = "tcp-client";
+	else if (i_prot == 4)
+		p_prot = "udp";
 	else
 #endif
 	if (i_prot == 1)
@@ -1030,6 +1038,10 @@ ovpn_server_expcli_main(int argc, char **argv)
 		p_prot = "tcp6-client";
 	else if (i_prot == 2)
 		p_prot = "udp6";
+	else if (i_prot == 5)
+		p_prot = "tcp-client";
+	else if (i_prot == 4)
+		p_prot = "udp";
 	else
 #endif
 	if (i_prot == 1)
