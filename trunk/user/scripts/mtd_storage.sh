@@ -527,8 +527,11 @@ EOF
 # Custom user conf file for OpenVPN server
 # Please add needed params only!
 
-ncp-disable
-tls-version-min 1.2
+### Cipher Negotiation
+data-ciphers ChaCha20-Poly1305:AES-256-GCM
+
+### Minimum TLS version
+tls-version-min 1.3
 
 ### Max clients limit
 max-clients 10
@@ -538,10 +541,6 @@ client-to-client
 
 ### Allow clients with duplicate "Common Name"
 ;duplicate-cn
-
-### Legacy LZO adaptive compression
-;comp-lzo adaptive
-;push "comp-lzo adaptive"
 
 ### Keepalive and timeout
 keepalive 10 60

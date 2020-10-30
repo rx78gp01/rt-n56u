@@ -194,7 +194,6 @@ function change_vpnc_type() {
 	showhide_div('row_vpnc_ov_auth', is_ov);
 	showhide_div('row_vpnc_ov_mdig', is_ov);
 	showhide_div('row_vpnc_ov_ciph', is_ov);
-	showhide_div('row_vpnc_ov_clzo', is_ov);
 	showhide_div('row_vpnc_ov_atls', is_ov);
 	showhide_div('row_vpnc_ov_mode', is_ov);
 	showhide_div('row_vpnc_ov_conf', is_ov);
@@ -498,7 +497,7 @@ function getHash(){
                                             <option value="0" <% nvram_match_x("", "vpnc_ov_ciph", "0","selected"); %>>[none]</option>
                                             <option value="1" <% nvram_match_x("", "vpnc_ov_ciph", "1","selected"); %>>[DES-CBC] DES, 64 bit</option>
                                             <option value="2" <% nvram_match_x("", "vpnc_ov_ciph", "2","selected"); %>>[DES-EDE-CBC] 3DES, 128 bit</option>
-                                            <option value="3" <% nvram_match_x("", "vpnc_ov_ciph", "3","selected"); %>>[BF-CBC] Blowfish, 128 bit (*)</option>
+                                            <option value="3" <% nvram_match_x("", "vpnc_ov_ciph", "3","selected"); %>>[BF-CBC] Blowfish, 128 bit</option>
                                             <option value="4" <% nvram_match_x("", "vpnc_ov_ciph", "4","selected"); %>>[AES-128-CBC] AES, 128 bit</option>
                                             <option value="5" <% nvram_match_x("", "vpnc_ov_ciph", "5","selected"); %>>[AES-192-CBC] AES, 192 bit</option>
                                             <option value="6" <% nvram_match_x("", "vpnc_ov_ciph", "6","selected"); %>>[DES-EDE3-CBC] 3DES, 192 bit</option>
@@ -510,18 +509,7 @@ function getHash(){
                                             <option value="12" <% nvram_match_x("", "vpnc_ov_ciph", "12","selected"); %>>[AES-128-GCM] AES-GCM, 128 bit</option>
                                             <option value="13" <% nvram_match_x("", "vpnc_ov_ciph", "13","selected"); %>>[AES-192-GCM] AES-GCM, 192 bit</option>
                                             <option value="14" <% nvram_match_x("", "vpnc_ov_ciph", "14","selected"); %>>[AES-256-GCM] AES-GCM, 256 bit</option>
-                                            <option value="15" <% nvram_match_x("", "vpnc_ov_ciph", "15","selected"); %>>[CHACHA20-POLY1305], 256 bit</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr id="row_vpnc_ov_clzo" style="display:none">
-                                    <th><#OVPN_CLZO#></th>
-                                    <td>
-                                        <select name="vpnc_ov_clzo" class="input">
-                                            <option value="0" <% nvram_match_x("", "vpnc_ov_clzo", "0","selected"); %>><#btn_Disable#></option>
-                                            <option value="1" <% nvram_match_x("", "vpnc_ov_clzo", "1","selected"); %>><#OVPN_CLZO_Item1#></option>
-                                            <option value="2" <% nvram_match_x("", "vpnc_ov_clzo", "2","selected"); %>><#OVPN_CLZO_Item2#> (*)</option>
-                                            <option value="3" <% nvram_match_x("", "vpnc_ov_clzo", "3","selected"); %>><#OVPN_CLZO_Item3#></option>
+                                            <option value="15" <% nvram_match_x("", "vpnc_ov_ciph", "15","selected"); %>>[CHACHA20-POLY1305], 256 bit (*)</option>
                                         </select>
                                     </td>
                                 </tr>
