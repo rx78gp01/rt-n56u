@@ -528,7 +528,7 @@ EOF
 # Please add needed params only!
 
 ### Cipher Negotiation
-data-ciphers ChaCha20-Poly1305:AES-256-GCM
+data-ciphers CHACHA20-POLY1305:AES-256-GCM
 
 ### Minimum TLS version
 tls-version-min 1.3
